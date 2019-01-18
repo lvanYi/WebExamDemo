@@ -23,8 +23,6 @@ public class LoginoutSvl extends HttpServlet {
 			throws ServletException, IOException {
 		//清除User
 		request.getSession().invalidate();   //所有session都被清除了.
-		//request.getSession().removeAttribute("user");
-		//调回首页  MainSvl
 		request.getRequestDispatcher("LoginSvl").forward(request, response);
 
 	}

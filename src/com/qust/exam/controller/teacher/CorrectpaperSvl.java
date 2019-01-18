@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.qust.exam.biz.TeacherBiz;
 import com.qust.exam.entity.Texam;
+import com.qust.exam.entity.Tpaperinfo;
 import com.qust.exam.entity.Tstuanscom;
 import com.qust.exam.util.Log;
 
@@ -50,18 +51,21 @@ public class CorrectpaperSvl extends HttpServlet {
 			throws ServletException, IOException {
 		   TeacherBiz biz=new TeacherBiz();
 		    try {
-//				List<Tpaperinfo>  tp=  biz.querypaper();
-//			     request.setAttribute("tp", tp);
-//			    request.getSession().setAttribute("tpaper", tp);
-			    List<Texam> exam=biz.queryexam();
-			    request.setAttribute("exam", exam);	
-			  request.getSession().setAttribute("texam", exam);
-			
-			     request.setAttribute("title", "阅卷");
-		         request.setAttribute("path", "correctpaper.jsp");
-				 Object a1=request.getSession().getAttribute("account");		
-				  request.setAttribute("a", a1);
-			     request.getRequestDispatcher("teacher.jsp").forward(request, response);
+				List<Tpaperinfo>  tp=  biz.querypaper();
+			    request.setAttribute("tp", tp);
+			    request.getSession().setAttribute("tpaper", tp);
+			    
+			    
+			    
+				List<Texam> exam=biz.queryexam();
+				request.setAttribute("exam", exam);	
+				request.getSession().setAttribute("texam", exam);
+				
+				request.setAttribute("title", "阅卷");
+				request.setAttribute("path", "correctpaper.jsp");
+				Object a1=request.getSession().getAttribute("account");		
+				request.setAttribute("a", a1);
+				request.getRequestDispatcher("teacher.jsp").forward(request, response);
 				
 			} catch (SQLException e) {
 				String msg="未知错误！请联系管理员！";
@@ -84,7 +88,7 @@ public class CorrectpaperSvl extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Object examid1=request.getSession().getAttribute("eid");
-	      int examid=Integer.valueOf((String)examid1);
+	    int examid=Integer.valueOf((String)examid1);
 		Object ts1= request.getSession().getAttribute("ts");
 		@SuppressWarnings("unchecked")
 		List<Tstuanscom> ts=(List<Tstuanscom>)ts1;

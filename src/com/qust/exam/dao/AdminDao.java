@@ -65,7 +65,7 @@ public List<Tpaperinfo> querypaper() throws SQLException{
 	
 	public List<Texam> querycorrect() throws SQLException{
 		List<Texam> exam=null;
-	String sql="select pid, examid£¬examtitle  from texam where ischeck=2 and examstate=3";
+	String sql="select pid, examid£¬examtitle  from texam where ischeck=0 and examstate=3";
 	openConnection();
 	PreparedStatement ps = conn.prepareStatement(sql);
 	ResultSet rs = ps.executeQuery();

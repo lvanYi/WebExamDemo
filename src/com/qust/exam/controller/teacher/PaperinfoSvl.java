@@ -47,22 +47,22 @@ public class PaperinfoSvl extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try{
-		String ptitle1=request.getParameter("ptitle");
-		String ptitle = new String(ptitle1.getBytes("iso-8859-1"),"GBK");
-		request.setAttribute("title","สิพํฃบ"+ptitle);
-		
-		TeacherBiz biz=new TeacherBiz();
-		Object pi=request.getSession().getAttribute("paid");
-		int pid=Integer.valueOf((String)pi);
-		int score=biz.queryallscore(pid);
-		
-		request.setAttribute("score", score);
-		
-			List<Tpaperties> tp=biz.queryQ(pid);
-			request.setAttribute("tp", tp);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String ptitle1=request.getParameter("ptitle");
+			String ptitle = new String(ptitle1.getBytes("iso-8859-1"),"GBK");
+			request.setAttribute("title","สิพํฃบ"+ptitle);
+			
+			TeacherBiz biz=new TeacherBiz();
+			Object pi=request.getSession().getAttribute("paid");
+			int pid=Integer.valueOf((String)pi);
+			int score=biz.queryallscore(pid);
+			
+			request.setAttribute("score", score);
+			
+				List<Tpaperties> tp=biz.queryQ(pid);
+				request.setAttribute("tp", tp);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 		}
 		
 		

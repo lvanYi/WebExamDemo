@@ -53,10 +53,7 @@ public class PersonInfoSvl extends HttpServlet {
 		request.setAttribute("path", "personinfo.jsp");
 		Object a1=request.getSession().getAttribute("account");		
 	    request.setAttribute("a", a1);
-		request.getRequestDispatcher("student.jsp").forward(request, response);
-
-
-		
+		request.getRequestDispatcher("student.jsp").forward(request, response);	
 	}
 
 	
@@ -71,31 +68,26 @@ public class PersonInfoSvl extends HttpServlet {
 		String semail=request.getParameter("semail");
 		
 		String saddress=request.getParameter("saddress");
-	
 		
-		
-		
-	     Tstudent stu=new Tstudent();
-	 
-	     stu.setSno(sno);
-         stu.setSaddress(saddress);
-        
-         stu.setSemail(semail);
-         stu.setScontact(scontact);
+		Tstudent stu=new Tstudent();
+ 
+		stu.setSno(sno);
+		stu.setSaddress(saddress);
+	    
+		stu.setSemail(semail);
+		stu.setScontact(scontact);
        
 		StudentBiz biz=new StudentBiz();
-		try {
-			    			 
-            	biz.editstudent(stu);
-    			request.setAttribute("path", "success.jsp");
-    			request.getRequestDispatcher("student.jsp").forward(request, response);
+		try {		    			 
+        	biz.editstudent(stu);
+			request.setAttribute("path", "success.jsp");
+			request.getRequestDispatcher("student.jsp").forward(request, response);
               
-			} catch (Exception e) {
-				request.setAttribute("msg", "发生未知错误，请联系管理员");
-				path = "error.jsp";
-				request.getRequestDispatcher(path).forward(request, response);
-			}
-
+		} catch (Exception e) {
+			request.setAttribute("msg", "发生未知错误，请联系管理员");
+			path = "error.jsp";
+			request.getRequestDispatcher(path).forward(request, response);
+		}
 	}
 
 	

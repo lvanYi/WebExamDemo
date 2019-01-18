@@ -88,8 +88,8 @@ public class ExamplanSvl extends HttpServlet {
 		String title=request.getParameter("ename");
 		String examtitle = new String(title.getBytes("iso-8859-1"),"GBK");
 		String examtype=request.getParameter("etype");
-		String ischeck=request.getParameter("eyue");
-		String examstate=request.getParameter("econ");
+		String ischeck="2";
+		String examstate="2";
 		int pid=Integer.valueOf(epid);
 	Texam exam=new Texam();
 	AdminBiz biz=new AdminBiz();
@@ -109,19 +109,22 @@ public class ExamplanSvl extends HttpServlet {
 	biz.addexamplan(exam);
 	List<Texam> exam1=biz.queryallexam();
 	request.setAttribute("exam",exam1);
+	
+	
+	
 	} catch (Exception e) {
 		String msg = "未知错误发生，请联系管理员......";
 		request.setAttribute("msg", msg);
 		request.getRequestDispatcher("error/error.jsp").forward(request, response);
-}
+	}
 	
 		
+
 	request.setAttribute("title", "考试信息编辑");
 	request.setAttribute("path", "editexamplan.jsp");
 	Object a1=request.getSession().getAttribute("account");		
 	request.setAttribute("a", a1);
 	request.getRequestDispatcher("admin/admin.jsp").forward(request, response);
-
 		
 		
 	}

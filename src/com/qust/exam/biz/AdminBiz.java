@@ -43,14 +43,12 @@ public class AdminBiz {
 		try{
 		
 		paperinfo=dao.querypaper();
-	}catch(SQLException e){
-		Log.logger.error(e.getMessage());
-		throw e;
-	}finally{
-	 dao.closeConnection();
-	}
-		
-		
+		}catch(SQLException e){
+			Log.logger.error(e.getMessage());
+			throw e;
+		}finally{
+		 dao.closeConnection();
+		}
 		return paperinfo;
 	}
 	

@@ -33,7 +33,7 @@ public class ChoosePaperSvl extends HttpServlet {
 		List<Tpaperinfo> paper=new ArrayList<Tpaperinfo>();
 		
 		try {	
-			//Date date=new Date();			
+			Date date=new Date();			
 			paperinfo = biz.queryallpaper();
 			for(Tpaperinfo t : paperinfo){
 				//if(t.getStime().compareTo(date)<0 && t.getEtime().compareTo(date)>=0){		

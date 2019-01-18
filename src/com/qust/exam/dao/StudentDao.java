@@ -16,28 +16,26 @@ public class StudentDao extends BaseDao {
 	
 	public int querypids( String sno) throws SQLException{
 		int examid=0;
-		String sql="select examid from tstuansinfo where sno=? ";
+		String sql="select examid from Tstuansinfo where sno=?";
 		openConnection();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1,sno);
 		
 		ResultSet rs = ps.executeQuery();
 		while (rs.next()) {
-			
-			examid=rs.getInt("answerid");
-			
+			examid=rs.getInt("answerid");	
 		}
 	
 	
 	return examid;
 	}
 	
-	
+
 	
 	
 	public int querypid(String sno,int examid) throws SQLException{
 		int pid=0;
-		String sql="select answerid from tstuansinfo where sno=? and examid=?";
+		String sql="select answerid from Tstuansinfo where sno=? and examid=?";
 		openConnection();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1,sno);
@@ -54,7 +52,7 @@ public class StudentDao extends BaseDao {
 	
 	public List<Tstuansinfo> querypapers(String sno) throws SQLException{
 		List<Tstuansinfo> t=new ArrayList<Tstuansinfo>();
-		String sql="select * from tstuansinfo where sno=? ";
+		String sql="select * from Tstuansinfo where sno=? ";
 		openConnection();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1,sno);
@@ -75,7 +73,7 @@ public class StudentDao extends BaseDao {
 	
 	public List<Tstuansinfo> querypaper(String sno) throws SQLException{
 		List<Tstuansinfo> t=new ArrayList<Tstuansinfo>();
-		String sql="select * from tstuansinfo ts,texam te  where ts.sno=? and ts.state=3 and ts.examid=te.examid";
+		String sql="select * from Tstuansinfo ts,texam te  where ts.sno=? and ts.state=3 and ts.examid=te.examid";
 		openConnection();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1,sno);
@@ -95,23 +93,20 @@ public class StudentDao extends BaseDao {
 		
 	
 	
-	
 	public void addtstuansinfo(int examid,String sno) throws SQLException{
-		String sql="insert into tstuansinfo values(seq_id.nextval,?,?,1,0)";
+		String sql="insert into Tstuansinfo values(seq_id.nextval,?,?,1,0)";
 		openConnection();
 		PreparedStatement ps = conn.prepareStatement(sql);	
 		ps.setInt(1,examid);
 		ps.setString(2,sno);
-	    ps.executeQuery();
-		
-		
+	    ps.executeQuery();		
 	}
 	
 	
-	
-	
-public void addts(int pid,int qid,String an) throws SQLException{
-		String sql="insert into tstuanscom values(seq_id.nextval,?,?,?,0)";
+		
+	public void addts(int pid,int qid,String an) throws SQLException{
+		//String sql="insert into Tstuansinfo values(seq_id.nextval,?,?,?,0)";
+		String sql="insert into Tstuanscom values(seq_id.nextval,?,?,?,0)";
 		openConnection();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(1, pid);
@@ -124,7 +119,7 @@ public void addts(int pid,int qid,String an) throws SQLException{
 
 	public Taccount checkaccount(String account) throws SQLException {
 		Taccount a = null;
-		String sql = "select *from taccount where uno=?";
+		String sql = "select *from Tstuansinfo where uno=?";
 		openConnection();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, account);
@@ -140,7 +135,7 @@ public void addts(int pid,int qid,String an) throws SQLException{
 
 	public Tstudent checkstudent(String sno) throws SQLException {
 		Tstudent student = null;
-		String sql = "select * from tstudent where sno=?";
+		String sql = "select * from Tstudent where sno=?";
 		openConnection();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, sno);
@@ -166,7 +161,7 @@ public void addts(int pid,int qid,String an) throws SQLException{
 	}
 
 	public void editstudent(Tstudent student) throws SQLException {
-		String sql = "update tstudent set  classno=? , sname=? ,sgender=?, sage=? ,scontact=? ,semail=? ,saddress=? ,sschool=?, sgrade=?  where  sno=?";
+		String sql = "update Tstudent set  classno=? , sname=? ,sgender=?, sage=? ,scontact=? ,semail=? ,saddress=? ,sschool=?, sgrade=?  where  sno=?";
 		openConnection();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, student.getClassno());
@@ -185,7 +180,7 @@ public void addts(int pid,int qid,String an) throws SQLException{
 
 	public boolean checkAccount(String sno) throws Exception {
 		boolean bRet = false;
-		String sql = "select password from taccount where uno='" + sno + "'";
+		String sql = "select password from Taccount where uno='" + sno + "'";
 		openConnection();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
@@ -198,7 +193,7 @@ public void addts(int pid,int qid,String an) throws SQLException{
 
 	public boolean checkAccount1(String sno, String pw) throws Exception {
 		boolean bRet = false;
-		String sql = "select password from taccount where uno='" + sno + "'";
+		String sql = "select password from Taccount where uno='" + sno + "'";
 		openConnection();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
@@ -211,7 +206,7 @@ public void addts(int pid,int qid,String an) throws SQLException{
 	}
 
 	public void eidtpwd(String sno, String password) throws Exception {
-		String sql = "update taccount set password=? where uno='" + sno + "'";
+		String sql = "update Taccount set password=? where uno='" + sno + "'";
 		openConnection();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, password);
@@ -249,7 +244,7 @@ public void addts(int pid,int qid,String an) throws SQLException{
 	
 public int queryscore(String sno , int sansid) throws Exception {
 	int score = 0;
-	String sql ="select score from tstuansinfo where sno=? and examid=?";
+	String sql ="select score from Tstuansinfo where sno=? and examid=?";
 	openConnection();
 	PreparedStatement ps = conn.prepareStatement(sql);
 	ps.setString(1,sno);

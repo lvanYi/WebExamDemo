@@ -48,7 +48,6 @@ public class Correctplan extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
 		AdminBiz biz=new AdminBiz();
 	
 		try {
@@ -58,32 +57,27 @@ public class Correctplan extends HttpServlet {
 			List<Tteacher> t = biz.queryallteacher();
 			request.setAttribute("teacher", t);
 		} catch (SQLException e) {
-			 request.setAttribute("title", "错误");
-			    String msg="未知错误！";
-			    request.setAttribute("msg", msg);
-		         request.setAttribute("path", "error.jsp");
-				 Object a1=request.getSession().getAttribute("account");		
-				  request.setAttribute("a", a1);
-			     request.getRequestDispatcher("admin.jsp").forward(request, response);
+			request.setAttribute("title", "错误");
+			String msg="未知错误！";
+			request.setAttribute("msg", msg);
+			request.setAttribute("path", "error.jsp");
+			Object a1=request.getSession().getAttribute("account");		
+			request.setAttribute("a", a1);
+			request.getRequestDispatcher("admin.jsp").forward(request, response);
 		} catch (Exception e) {
-			 request.setAttribute("title", "错误");
-			    String msg="未知错误！";
-			    request.setAttribute("msg", msg);
-		         request.setAttribute("path", "error.jsp");
-				 Object a1=request.getSession().getAttribute("account");		
-				  request.setAttribute("a", a1);
-			     request.getRequestDispatcher("admin.jsp").forward(request, response);
+			request.setAttribute("title", "错误");
+			String msg="未知错误！";
+			request.setAttribute("msg", msg);
+			request.setAttribute("path", "error.jsp");
+			Object a1=request.getSession().getAttribute("account");		
+			request.setAttribute("a", a1);
+			request.getRequestDispatcher("admin.jsp").forward(request, response);
 		}
-		
-		
-		
 		request.setAttribute("title", "阅卷安排");
 		request.setAttribute("path", "correctplan.jsp");
 		Object a1=request.getSession().getAttribute("account");		
 	    request.setAttribute("a", a1);
-request.getRequestDispatcher("admin/admin.jsp").forward(request, response);
-
-		
+	    request.getRequestDispatcher("admin/admin.jsp").forward(request, response);	
 	}
 
 	/**
@@ -98,33 +92,31 @@ request.getRequestDispatcher("admin/admin.jsp").forward(request, response);
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-String examid1=request.getParameter("examid");
-String tno=request.getParameter("tno");
-int examid=Integer.valueOf(examid1);
-
-AdminBiz biz=new AdminBiz();
-try {
-
-	biz.addtm(examid,tno);
-	List<Texam> exam=biz.querycorrecct();
-	request.setAttribute("exam", exam);
-	List<Tteacher> t = biz.queryallteacher();
-	request.setAttribute("teacher", t);
-	request.setAttribute("msg", "添加成功！");
-} catch (SQLException e) {
-	// TODO Auto-generated catch block
-	e.printStackTrace();
-} catch (Exception e) {
-	// TODO Auto-generated catch block
-	e.printStackTrace();
-}
-request.setAttribute("title", "添加成功");
-request.setAttribute("path", "suc.jsp");
-Object a1=request.getSession().getAttribute("account");		
-request.setAttribute("a", a1);
-request.getRequestDispatcher("admin/admin.jsp").forward(request, response);
-
-
+		String examid1=request.getParameter("examid");
+		String tno=request.getParameter("tno");
+		int examid=Integer.valueOf(examid1);
+		
+		AdminBiz biz=new AdminBiz();
+		try {
+		
+			biz.addtm(examid,tno);
+			List<Texam> exam=biz.querycorrecct();
+			request.setAttribute("exam", exam);
+			List<Tteacher> t = biz.queryallteacher();
+			request.setAttribute("teacher", t);
+			request.setAttribute("msg", "添加成功！");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		request.setAttribute("title", "添加成功");
+		request.setAttribute("path", "suc.jsp");
+		Object a1=request.getSession().getAttribute("account");		
+		request.setAttribute("a", a1);
+		request.getRequestDispatcher("admin/admin.jsp").forward(request, response);
 }
 
 	/**

@@ -48,9 +48,8 @@ public class ExamplaneditSvl extends HttpServlet {
 			throws ServletException, IOException {
 		AdminBiz biz=new AdminBiz();
 		try {
-		List<Texam> exam=biz.queryallexam();
-		request.setAttribute("exam",exam);
-		
+			List<Texam> exam=biz.queryallexam();
+			request.setAttribute("exam",exam);
 		} catch (Exception e) {
 			request.setAttribute("msg", "发生未知错误，请联系管理员");
 			String path = "error/error.jsp";
@@ -61,7 +60,6 @@ public class ExamplaneditSvl extends HttpServlet {
 		Object a1=request.getSession().getAttribute("account");		
 		request.setAttribute("a", a1);
 		request.getRequestDispatcher("admin/admin.jsp").forward(request, response);
-
 	}
 
 	/**

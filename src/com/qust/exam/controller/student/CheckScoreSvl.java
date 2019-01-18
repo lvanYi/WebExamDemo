@@ -44,6 +44,7 @@ public class CheckScoreSvl extends HttpServlet {
 		StudentBiz biz =new StudentBiz();
 		
 		try {
+			
 			List<Tstuansinfo>  ts = biz.querypaper(sno);
 			request.setAttribute("ts", ts);
 			request.setAttribute("title", "考生成绩");
@@ -54,7 +55,7 @@ public class CheckScoreSvl extends HttpServlet {
 		} catch (Exception e) {
 			request.setAttribute("msg", "发生未知错误，请联系管理员");
 			String path = "error.jsp";
-			request.getRequestDispatcher(path).forward(request, response);
+			request.getRequestDispatcher(path).forward(request, response);;
 		}
 		
 	}

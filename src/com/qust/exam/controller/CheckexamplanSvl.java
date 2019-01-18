@@ -78,14 +78,14 @@ public class CheckexamplanSvl extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try{
-		   String examid1=request.getParameter("examid");
+			String examid1=request.getParameter("examid");
 		  
 			Texam exam;
 			
 			if(examid1 !=null && !examid1.equals("")){
-					  int examid=Integer.valueOf(examid1);
-					    AdminBiz biz=new AdminBiz();
-			
+				int examid=Integer.valueOf(examid1);
+				AdminBiz biz=new AdminBiz();
+				
 				exam = biz.queryexam(examid);
 				request.setAttribute("e",exam);
 			}
@@ -95,24 +95,23 @@ public class CheckexamplanSvl extends HttpServlet {
 			request.setAttribute("a", a1);
 			request.getRequestDispatcher("admin/admin.jsp").forward(request, response);
 
-			} catch (SQLException e) {
-				 request.setAttribute("msg", "查询出错 !请确认试题ID!");
-				 request.setAttribute("title", "错误信息");
-					request.setAttribute("path", "error.jsp");
-					Object a1=request.getSession().getAttribute("account");		
-					request.setAttribute("a", a1);
-					request.getRequestDispatcher("admin/admin.jsp").forward(request, response);
+		} catch (SQLException e) {
+			request.setAttribute("msg", "查询出错 !请确认试题ID!");
+			request.setAttribute("title", "错误信息");
+			request.setAttribute("path", "error.jsp");
+			Object a1=request.getSession().getAttribute("account");		
+			request.setAttribute("a", a1);
+			request.getRequestDispatcher("admin/admin.jsp").forward(request, response);
 					
-			}catch (Exception e) {
-				 request.setAttribute("msg", "查询出错! 请确认试题ID!");
-				 request.setAttribute("title", "错误信息");
-					request.setAttribute("path", "error.jsp");
-					Object a1=request.getSession().getAttribute("account");		
-					request.setAttribute("a", a1);
-					request.getRequestDispatcher("admin/admin.jsp").forward(request, response);
+		}catch (Exception e) {
+			request.setAttribute("msg", "查询出错! 请确认试题ID!");
+			request.setAttribute("title", "错误信息");
+			request.setAttribute("path", "error.jsp");
+			Object a1=request.getSession().getAttribute("account");		
+			request.setAttribute("a", a1);
+			request.getRequestDispatcher("admin/admin.jsp").forward(request, response);
 					
-			}
-		
+		}	
 	}
 
 	/**

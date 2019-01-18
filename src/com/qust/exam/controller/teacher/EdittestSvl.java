@@ -46,8 +46,6 @@ public class EdittestSvl extends HttpServlet {
 			throws ServletException, IOException {	
 		String pid=request.getParameter("pid");
 		request.getSession().setAttribute("paid", pid);
-		
-		
 		String ptitle1=request.getParameter("ptitle");
 		String ptitle = new String(ptitle1.getBytes("iso-8859-1"),"GBK");
 		request.getSession().setAttribute("ptitle",ptitle);
@@ -72,25 +70,25 @@ public class EdittestSvl extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-String kid=request.getParameter("kid");
-String qtid=request.getParameter("qtid");
-String ptitle=(String) request.getSession().getAttribute("ptitle");
-
-TeacherBiz biz=new TeacherBiz();
-try {
-	List<Tquestion> question=biz.querytq(kid, qtid);
-	request.setAttribute("question", question);
-	
-} catch (Exception e) {
-	// TODO Auto-generated catch block
-	e.printStackTrace();
-}
-	
-request.setAttribute("title","สิพํฃบ"+ptitle);
-request.setAttribute("path", "editpaperinfo.jsp");
-Object a1=request.getSession().getAttribute("account");		
-request.setAttribute("a", a1);
-request.getRequestDispatcher("teacher.jsp").forward(request, response);
+		String kid=request.getParameter("kid");
+		String qtid=request.getParameter("qtid");
+		String ptitle=(String) request.getSession().getAttribute("ptitle");
+		
+		TeacherBiz biz=new TeacherBiz();
+		try {
+			List<Tquestion> question=biz.querytq(kid, qtid);
+			request.setAttribute("question", question);
+			
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+		request.setAttribute("title","สิพํฃบ"+ptitle);
+		request.setAttribute("path", "editpaperinfo.jsp");
+		Object a1=request.getSession().getAttribute("account");		
+		request.setAttribute("a", a1);
+		request.getRequestDispatcher("teacher.jsp").forward(request, response);
 
 	}
 

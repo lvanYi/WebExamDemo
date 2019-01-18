@@ -3,6 +3,7 @@ package com.qust.exam.controller.student;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -45,20 +46,17 @@ public class ExamSvl extends HttpServlet {
 		
 		String pid1=request.getParameter("pid");
 		request.getSession().setAttribute("ppid", pid1);
-		
 		int pid=Integer.valueOf(pid1);
 		int examid=Integer.valueOf((String)examid1);
-		
 		Taccount account = (Taccount) request.getSession().getAttribute("account");
 		String sno = account.getUno();
 		request.setAttribute("a", account);
 		ExamBiz biz = new ExamBiz();
 		StudentBiz sbiz=new StudentBiz();
 		try {
-			
 			if(sbiz.querypids(sno)!=examid){			
-			sbiz.addtstuansinfo(examid,sno);
-			}				
+				sbiz.addtstuansinfo(examid,sno);
+			}
 			List<Tpaperties> choices = biz.queryBychioce(pid);
 			request.setAttribute("choices", choices);
 			request.getSession().setAttribute("choices", choices);
@@ -112,9 +110,7 @@ public class ExamSvl extends HttpServlet {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
-	
-//	
+
 //		try {
 //		
 //					biz.addtstuansinfo(pid,examid,sno);	
@@ -137,16 +133,16 @@ public class ExamSvl extends HttpServlet {
 		@SuppressWarnings("unchecked")
 		List<Tpaperties> ap = (List<Tpaperties>) request.getSession().getAttribute("applications");
 
+		
 		for (Tpaperties c : c1) {
 			String q= String.valueOf(c.getQid());
 			String qan= request.getParameter(q);
 			try {
-				int qid=Integer.valueOf(q);				
+				int qid=Integer.valueOf(q);
 			    biz.addts(pid, qid, qan);
 			} catch (Exception e) {
 				request.setAttribute("msg","提交试卷成功");
-				request.setAttribute("path", "suc.jsp");
-				
+				request.setAttribute("path", "suc.jsp");	
 			}
 		}
 		
@@ -156,7 +152,7 @@ public class ExamSvl extends HttpServlet {
 			try {
 				String qan= "";
 				if(b != null && !b.equals("")){
-				 qan= new String(b.getBytes("iso-8859-1"),"GBK");
+					qan= new String(b.getBytes("iso-8859-1"),"GBK");
 				}
 				int qid=Integer.valueOf(q);				
 			    biz.addts(pid, qid, qan);
@@ -213,16 +209,8 @@ public class ExamSvl extends HttpServlet {
 				request.setAttribute("msg","提交试卷成功");
 				request.setAttribute("path", "suc.jsp");
 			}
-		}
-		
-		
-		request.getRequestDispatcher("student.jsp").forward(request, response);
-		
-		
-		
-		
-		
-		
+		}	
+		request.getRequestDispatcher("student.jsp").forward(request, response);			
 	}
 
 	public void init() throws ServletException {

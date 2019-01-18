@@ -31,7 +31,6 @@ public class StudentBiz {
 	}
 	
 	
-	
 public int querypid( String sno,int examid) throws SQLException{
 	int pid=0;
 	StudentDao dao=new StudentDao();
@@ -94,9 +93,6 @@ public List<Tstuansinfo> querypaper(String sno) throws SQLException{
 }	
 	
 	
-	
-	
-	
 	public void addtstuansinfo(int examid,String sno) throws Exception{
 		StudentDao dao=new StudentDao();
 		try{
@@ -109,11 +105,10 @@ public List<Tstuansinfo> querypaper(String sno) throws SQLException{
 		finally {
 			dao.closeConnection();
 		}
-	
-	
-	
 	}
-	
+
+		
+		
 	public void addts(int pid,int qid,String an) throws Exception{
 		StudentDao dao=new StudentDao();
 		try{
@@ -228,10 +223,10 @@ public List<Tstuansinfo> querypaper(String sno) throws SQLException{
 	
 	public int queryscore(String  sno , int sansid) throws Exception {
 		
-	        int score=0;
+	     int score=0;
 		 StudentDao dao = new StudentDao();
 		 try{
-		score=dao.queryscore(sno, sansid);
+			 score=dao.queryscore(sno, sansid);
 		 }catch(Exception e){
 			 Log.logger.error(e.getMessage());
 		 }finally{
